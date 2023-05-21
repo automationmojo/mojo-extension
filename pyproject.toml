@@ -2,7 +2,9 @@
 name = "mojo-extension"
 description = "Automation Mojo Extension Package"
 version = "0.0.1"
-authors = []
+authors = [
+    "Myron Walker <myron.walker@gmail.com>"
+]
 readme = "README.rst"
 license = "LICENSE.txt"
 classifiers = [
