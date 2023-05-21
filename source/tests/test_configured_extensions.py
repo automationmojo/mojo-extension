@@ -11,13 +11,9 @@ from myextinst import MyExtInstProtocol, MyExtInstFactory
 from myexttype import MyExtTypeProtocol, MyExtTypeFactory
 
 
-module_name = __name__
-
-
 class TestConfiguredExtensions(unittest.TestCase):
 
     def setUp(self) -> None:
-        this_module = sys.modules[__name__]
         ExtensionConfiguration.CONFIGURED_FACTORY_MODULES = [
             "myextinst",
             "myexttype"
