@@ -5,7 +5,7 @@ import sys
 import unittest
 
 from mojo.extension.extensionconfiguration import ExtensionConfiguration
-from mojo.extension.wellknown import configured_superfactory_singleton
+from mojo.extension.wellknown import ConfiguredSuperFactorySingleton
 
 from myextinst import MyExtInstProtocol, MyExtInstFactory
 from myexttype import MyExtTypeProtocol, MyExtTypeFactory
@@ -23,7 +23,7 @@ class TestConfiguredExtensions(unittest.TestCase):
             "myexttype"
         ]
 
-        self._super_factory = configured_superfactory_singleton()
+        self._super_factory = ConfiguredSuperFactorySingleton()
         return super().setUp()
     
     def test_create_instance_by_order(self):

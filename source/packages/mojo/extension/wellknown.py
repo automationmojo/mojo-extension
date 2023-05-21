@@ -6,7 +6,7 @@ CONFIGURED_SUPER_FACTORY = None
 from mojo.extension.extensionconfiguration import ExtensionConfiguration
 from mojo.extension.superfactory import SuperFactory
 
-def configured_superfactory_singleton():
+def ConfiguredSuperFactorySingleton():
 
     global CONFIGURED_SUPER_FACTORY
 
