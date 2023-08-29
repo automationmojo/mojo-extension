@@ -1,3 +1,3 @@
-# Automation Mojo Networking Package (mojo-networking)
+# Automation Mojo Extensions Package (mojo-extensions)
 
-This repository contains modules and functions to support TCP and UDP networking interop and protocols.
+This repository contains modules and functions to enable packages to be extensible.
