@@ -11,7 +11,7 @@ if "MOJO-EXTENSION" in startup_config:
 
 class ExtensionConfiguration:
 
-    MJR_CONFIGURED_FACTORY_MODULES = None
+    MJR_CONFIGURED_FACTORY_MODULES = []
     if "MJR_CONFIGURED_FACTORY_MODULES" in os.environ:
         modules_as_path = os.environ["MJR_CONFIGURED_FACTORY_MODULES"]
         MJR_CONFIGURED_FACTORY_MODULES = set([m.strip() for m in modules_as_path.split(",")])
