@@ -1,26 +1,36 @@
 
-from typing import Type
-
-import sys
+import tempfile
 import unittest
 
-from mojo.extension.extensionvariables import ExtensionConfiguration
-from mojo.extension.wellknown import ConfiguredSuperFactorySingleton
+from mojo.startup.startupvariables import MOJO_STARTUP_VARIABLES
+from mojo.startup.wellknown import StartupConfigSingleton
 
 from myextinst import MyExtInstProtocol, MyExtInstFactory
 from myexttype import MyExtTypeProtocol, MyExtTypeFactory
 
+CONFIG_CONTENT = """
+[MOJO-EXTENSION]
+MJR_CONFIGURED_FACTORY_MODULES = myextinst,myexttype
+"""
 
 class TestConfiguredExtensions(unittest.TestCase):
 
-    def setUp(self) -> None:
-        ExtensionConfiguration.MJR_CONFIGURED_FACTORY_MODULES = [
-            "myextinst",
-            "myexttype"
-        ]
+    @classmethod
+    def setUpClass(cls) -> None:
 
-        self._super_factory = ConfiguredSuperFactorySingleton()
-        return super().setUp()
+        tempconfig = tempfile.mktemp()
+        with open(tempconfig, 'w+') as cf:
+            cf.write(CONFIG_CONTENT)
+
+        MOJO_STARTUP_VARIABLES.MJR_STARTUP_SETTINGS = tempconfig
+
+        cls._startup_config = StartupConfigSingleton()
+        cls._ext_config = cls._startup_config["MOJO-EXTENSION"]
+
+        from mojo.extension.wellknown import ConfiguredSuperFactorySingleton
+        cls._super_factory = ConfiguredSuperFactorySingleton()
+
+        return
     
     def test_create_instance_by_order(self):
 
