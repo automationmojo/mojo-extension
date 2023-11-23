@@ -13,6 +13,8 @@ class SuperFactory:
         in order to enable various types of overload or overinstance states.
     """
 
+    default_factories = {}
+
     def __init__(self, factory_modules: List[str]):
 
         self._factory_modules = factory_modules
@@ -23,6 +25,15 @@ class SuperFactory:
             factory_type = load_and_set_extension_factory_type(smod)
             if factory_type is not None:
                 self._extension_factories.append(factory_type)
+
+        return
+
+    @classmethod
+    def ensure_default_factory_module(cls, module_name: str):
+
+        if module_name not in cls.default_factories:
+            def_fact_type = load_and_set_extension_factory_type(module_name)
+            cls.default_factories[module_name] = def_fact_type
 
         return
 
@@ -47,7 +58,10 @@ class SuperFactory:
 
         create_instance: Callable = None
 
-        for factory_type in self._extension_factories:
+        search_factories = [f for f in self._extension_factories]
+        search_factories.extend(self.default_factories.values())
+
+        for factory_type in search_factories:
             if hasattr(factory_type, factory_method):
                 factory_proto_name = factory_type.ext_protocol_name
                 if factory_proto_name == proto_name:
@@ -67,7 +81,10 @@ class SuperFactory:
         proto_name = proto_type.ext_protocol_name
         factory_method = factory_method.__name__
 
-        for factory_type in self._extension_factories:
+        search_factories = [f for f in self._extension_factories]
+        search_factories.extend(self.default_factories.values())
+
+        for factory_type in search_factories:
             if hasattr(factory_type, factory_method):
                 factory_proto_name = factory_type.ext_protocol_name
                 if factory_proto_name == proto_name:
@@ -88,7 +105,10 @@ class SuperFactory:
         proto_name = proto_type.ext_protocol_name
         get_type_method = get_type_method.__name__
         
-        for factory_type in self._extension_factories:
+        search_factories = [f for f in self._extension_factories]
+        search_factories.extend(self.default_factories.values())
+
+        for factory_type in search_factories:
             if hasattr(factory_type, get_type_method):
                 factory_proto_name = factory_type.ext_protocol_name
                 if factory_proto_name == proto_name:
@@ -110,7 +130,10 @@ class SuperFactory:
         proto_name = proto_type.ext_protocol_name
         get_type_method = get_type_method.__name__
         
-        for factory_type in self._extension_factories:
+        search_factories = [f for f in self._extension_factories]
+        search_factories.extend(self.default_factories.values())
+
+        for factory_type in search_factories:
             if hasattr(factory_type, get_type_method):
                 factory_proto_name = factory_type.ext_protocol_name
                 if factory_proto_name == proto_name:
