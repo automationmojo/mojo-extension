@@ -328,6 +328,18 @@ files = [
 ]
 
 [[package]]
+name = "mojo-startup"
+version = "0.0.1"
+description = "Automation Mojo Startup Package"
+category = "main"
+optional = false
+python-versions = ">=3.8,<4.0"
+files = [
+    {file = "mojo_startup-0.0.1-py3-none-any.whl", hash = "sha256:d7d541ea91231f6f9307187adae094b70a69952350bb12e361c53b8c167dd0ba"},
+    {file = "mojo_startup-0.0.1.tar.gz", hash = "sha256:89917267877fd88d1599b43ecf188804eb0791adcb721f11ccdd274834d766a2"},
+]
+
+[[package]]
 name = "myst-parser"
 version = "0.18.1"
 description = "An extended commonmark compliant parser, with bridges to docutils & sphinx."
@@ -692,4 +704,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<4.0"
-content-hash = "dae03be2ca455d2199b6028d1fbd7ff8f913fd9d51070edfae8a67a4d0a8b513"
+content-hash = "68023428a0b34b357a2930f2088e767ebf3c7104b1d9b5139444afe3c1fb9d9a"

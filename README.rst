@@ -24,22 +24,23 @@ For example, if we want to be able to create instance of object like these from 
         ext_protocol_name = "mojo-myextypeprotocol"
 
         @classmethod
-        def give_me_a_hey(cls) -> Type[Hey]:
+        def give_me_a_hey(cls):
             ...
-        
+
         @classmethod
-        def give_me_a_ho(cls) -> Type[Ho]:
+        def give_me_a_ho(cls):
             ...
 
     class MyExtTypeFactory(ExtFactory, MyExtTypeProtocol):
 
         @classmethod
-        def give_me_a_hey(cls) -> Hey:
+        def give_me_a_hey(cls):
             return Hey
         
         @classmethod
-        def give_me_a_ho(cls) -> Ho:
+        def give_me_a_ho(cls):
             return Ho
+
 
 Then what we do i we register the module where the type is found.
 
@@ -53,6 +54,7 @@ Then what we do i we register the module where the type is found.
             "myexttype"
         ]
 
+
 Then we get an instance of the super factory singleton.
 
 .. code:: python
@@ -60,6 +62,7 @@ Then we get an instance of the super factory singleton.
     from mojo.extension.wellknown import ConfiguredSuperFactorySingleton
 
     superfactory = ConfiguredSuperFactorySingleton()
+
 
 Then when we want to get the type from the extension, we utilize the protocol that
 was declared and ask for the type using the function on the protocol that will return
@@ -81,6 +84,5 @@ the type.
 References
 ==========
 
-- `User Guide <userguide/userguide.rst>
-  
-- `Coding Standards <userguide/10-00-coding-standards.rst>`
+- `User Guide <userguide/userguide.rst>`_
+- `Coding Standards <userguide/10-00-coding-standards.rst>`_
