@@ -1,10 +1,30 @@
+"""
+.. module:: superfactory
+    :platform: Darwin, Linux, Unix, Windows
+    :synopsis: Module that contains the `SuperFactory` object which is used to
+               create a singleton instance for dynamically loading type extensions.
+
+.. moduleauthor:: Myron Walker <myron.walker@gmail.com>
+"""
+
+__author__ = "Myron Walker"
+__copyright__ = "Copyright 2023, Myron W Walker"
+__credits__ = []
+__version__ = "1.0.0"
+__maintainer__ = "Myron Walker"
+__email__ = "myron.walker@gmail.com"
+__status__ = "Development" # Prototype, Development or Production
+__license__ = "MIT"
 
 import inspect
 import threading
 
 from typing import Callable, Generator, List, Type, Union
 
-from mojo.extension.utilities import load_and_set_extension_factory_type
+from mojo.extension.utilities import (
+    load_and_set_extension_factory_type,
+    scan_mojo_factories_namespace
+)
 
 class SuperFactory:
     """
@@ -13,27 +33,17 @@ class SuperFactory:
         in order to enable various types of overload or overinstance states.
     """
 
-    default_factories = {}
-
     def __init__(self, factory_modules: List[str]):
 
         self._factory_modules = factory_modules
 
+        self._default_factories = scan_mojo_factories_namespace()
         self._extension_factories = []
 
         for smod in self._factory_modules:
             factory_type = load_and_set_extension_factory_type(smod)
             if factory_type is not None:
                 self._extension_factories.append(factory_type)
-
-        return
-
-    @classmethod
-    def ensure_default_factory_module(cls, module_name: str):
-
-        if module_name not in cls.default_factories:
-            def_fact_type = load_and_set_extension_factory_type(module_name)
-            cls.default_factories[module_name] = def_fact_type
 
         return
 
@@ -59,7 +69,7 @@ class SuperFactory:
         create_instance: Callable = None
 
         search_factories = [f for f in self._extension_factories]
-        search_factories.extend(self.default_factories.values())
+        search_factories.extend(self._default_factories.values())
 
         for factory_type in search_factories:
             if hasattr(factory_type, factory_method):
@@ -82,7 +92,7 @@ class SuperFactory:
         factory_method = factory_method.__name__
 
         search_factories = [f for f in self._extension_factories]
-        search_factories.extend(self.default_factories.values())
+        search_factories.extend(self._default_factories.values())
 
         for factory_type in search_factories:
             if hasattr(factory_type, factory_method):
@@ -106,7 +116,7 @@ class SuperFactory:
         get_type_method = get_type_method.__name__
         
         search_factories = [f for f in self._extension_factories]
-        search_factories.extend(self.default_factories.values())
+        search_factories.extend(self._default_factories.values())
 
         for factory_type in search_factories:
             if hasattr(factory_type, get_type_method):
@@ -131,7 +141,7 @@ class SuperFactory:
         get_type_method = get_type_method.__name__
         
         search_factories = [f for f in self._extension_factories]
-        search_factories.extend(self.default_factories.values())
+        search_factories.extend(self._default_factories.values())
 
         for factory_type in search_factories:
             if hasattr(factory_type, get_type_method):

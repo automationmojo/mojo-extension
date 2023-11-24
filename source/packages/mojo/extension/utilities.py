@@ -1,7 +1,27 @@
+"""
+.. module:: utilities
+    :platform: Darwin, Linux, Unix, Windows
+    :synopsis: Module that contains utility functions used to scan for extension modules
+               and factory types.
+
+.. moduleauthor:: Myron Walker <myron.walker@gmail.com>
+"""
+
+__author__ = "Myron Walker"
+__copyright__ = "Copyright 2023, Myron W Walker"
+__credits__ = []
+__version__ = "1.0.0"
+__maintainer__ = "Myron Walker"
+__email__ = "myron.walker@gmail.com"
+__status__ = "Development" # Prototype, Development or Production
+__license__ = "MIT"
+
+from typing import List
 
 import importlib
 import inspect
 import logging
+import os
 import sys
 
 from types import ModuleType
@@ -65,3 +85,36 @@ def load_and_set_extension_factory_type(module_name: str):
         logger.warning(wmsg)
 
     return factory_type
+
+def scan_mojo_factories_namespace(self) -> List[str]:
+
+    search_paths = set([p for p in sys.path])
+
+    rel_mojo_factories =  os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+    search_paths.add(rel_mojo_factories)
+
+    modules_found = []
+
+    for dir_path in search_paths:
+        check_dir = os.path.join(dir_path, "mojo", "factories")
+        if os.path.exists(check_dir) and os.path.isdir(check_dir):
+            check_dir_modules = scan_for_descendant_modules(check_dir)
+            modules_found.extend(check_dir_modules)
+
+    return
+
+def scan_for_descendant_modules(scan_dir: str, module_prefix: str="mojo.factories") -> List[str]:
+
+    modules_found = []
+
+    for dirpath, dirnames, filenames in os.walk(scan_dir):
+        dirpath = dirpath.strip(os.sep)
+        dirpath_parts = dirpath.split(os.sep)
+
+        for fname in filenames:
+            if fname.endswith(".py"):
+                mod_parts_comp = ".".join(dirpath_parts)
+                mod_name = f"{module_prefix}.{mod_parts_comp}.{fname}"
+                modules_found.append(mod_name)
+
+    return modules_found
