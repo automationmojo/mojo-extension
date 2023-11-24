@@ -35,9 +35,12 @@ class SuperFactory:
 
     def __init__(self, factory_modules: List[str]):
 
-        self._factory_modules = factory_modules
-
         self._default_factories = scan_mojo_factories_namespace()
+        
+        self._factory_modules = scan_mojo_factories_namespace()
+        if len(factory_modules) > 0:
+            self._factory_modules.extend(factory_modules)
+
         self._extension_factories = []
 
         for smod in self._factory_modules:
@@ -68,10 +71,7 @@ class SuperFactory:
 
         create_instance: Callable = None
 
-        search_factories = [f for f in self._extension_factories]
-        search_factories.extend(self._default_factories.values())
-
-        for factory_type in search_factories:
+        for factory_type in self._extension_factories:
             if hasattr(factory_type, factory_method):
                 factory_proto_name = factory_type.ext_protocol_name
                 if factory_proto_name == proto_name:
@@ -91,10 +91,7 @@ class SuperFactory:
         proto_name = proto_type.ext_protocol_name
         factory_method = factory_method.__name__
 
-        search_factories = [f for f in self._extension_factories]
-        search_factories.extend(self._default_factories.values())
-
-        for factory_type in search_factories:
+        for factory_type in self._extension_factories:
             if hasattr(factory_type, factory_method):
                 factory_proto_name = factory_type.ext_protocol_name
                 if factory_proto_name == proto_name:
@@ -114,11 +111,8 @@ class SuperFactory:
         proto_type = get_type_method.__globals__[proto_type_name]
         proto_name = proto_type.ext_protocol_name
         get_type_method = get_type_method.__name__
-        
-        search_factories = [f for f in self._extension_factories]
-        search_factories.extend(self._default_factories.values())
 
-        for factory_type in search_factories:
+        for factory_type in self._extension_factories:
             if hasattr(factory_type, get_type_method):
                 factory_proto_name = factory_type.ext_protocol_name
                 if factory_proto_name == proto_name:
@@ -140,10 +134,7 @@ class SuperFactory:
         proto_name = proto_type.ext_protocol_name
         get_type_method = get_type_method.__name__
         
-        search_factories = [f for f in self._extension_factories]
-        search_factories.extend(self._default_factories.values())
-
-        for factory_type in search_factories:
+        for factory_type in self._extension_factories:
             if hasattr(factory_type, get_type_method):
                 factory_proto_name = factory_type.ext_protocol_name
                 if factory_proto_name == proto_name:

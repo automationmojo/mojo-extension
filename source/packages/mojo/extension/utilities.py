@@ -101,20 +101,26 @@ def scan_mojo_factories_namespace() -> List[str]:
             check_dir_modules = scan_for_descendant_modules(check_dir)
             modules_found.extend(check_dir_modules)
 
-    return
+    return modules_found
 
 def scan_for_descendant_modules(scan_dir: str, module_prefix: str="mojo.factories") -> List[str]:
 
     modules_found = []
 
     for dirpath, dirnames, filenames in os.walk(scan_dir):
-        dirpath = dirpath.strip(os.sep)
-        dirpath_parts = dirpath.split(os.sep)
+        leafpath = dirpath[len(scan_dir):].strip(os.sep)
+        leafpath_parts = []
+        if len(leafpath) > 0:
+            leafpath_parts = dirpath.split(os.sep)
 
         for fname in filenames:
             if fname.endswith(".py"):
-                mod_parts_comp = ".".join(dirpath_parts)
-                mod_name = f"{module_prefix}.{mod_parts_comp}.{fname}"
+                fcomp = fname[:-3]
+                mod_parts_comp = ""
+                if len(leafpath_parts) > 0:
+                    mod_parts_comp = "." + ".".join(leafpath_parts)
+
+                mod_name = f"{module_prefix}{mod_parts_comp}.{fcomp}"
                 modules_found.append(mod_name)
 
     return modules_found
