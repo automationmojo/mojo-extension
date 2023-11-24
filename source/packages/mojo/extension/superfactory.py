@@ -151,3 +151,4 @@ class SuperFactory:
             
                     found_type = get_type_with()
                     yield found_type
+

@@ -86,7 +86,7 @@ def load_and_set_extension_factory_type(module_name: str):
 
     return factory_type
 
-def scan_mojo_factories_namespace(self) -> List[str]:
+def scan_mojo_factories_namespace() -> List[str]:
 
     search_paths = set([p for p in sys.path])
 
