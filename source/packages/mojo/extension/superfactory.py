@@ -19,6 +19,7 @@ __license__ = "MIT"
 import inspect
 import threading
 
+from operator import attrgetter
 from typing import Callable, Generator, List, Type, Union
 
 from mojo.extension.utilities import (
@@ -47,6 +48,8 @@ class SuperFactory:
             factory_type = load_and_set_extension_factory_type(smod)
             if factory_type is not None:
                 self._extension_factories.append(factory_type)
+
+        self._extension_factories.sort(key=attrgetter('PRECEDENCE'))
 
         return
 

@@ -11,3 +11,5 @@ class ExtFactory:
     """
         The base class used to extend
     """
+
+    PRECEDENCE = 0
