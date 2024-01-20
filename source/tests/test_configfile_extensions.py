@@ -5,8 +5,8 @@ import unittest
 from mojo.startup.startupvariables import MOJO_STARTUP_VARIABLES
 from mojo.startup.wellknown import StartupConfigSingleton
 
-from tests.myextinst import MyExtInstProtocol, MyExtInstFactory
-from tests.myexttype import MyExtTypeProtocol, MyExtTypeFactory
+from myextinst import MyExtInstProtocol, MyExtInstFactory
+from myexttype import MyExtTypeProtocol, MyExtTypeFactory
 
 CONFIG_CONTENT = """
 [MOJO-EXTENSION]
