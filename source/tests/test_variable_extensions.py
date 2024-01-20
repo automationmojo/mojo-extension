@@ -7,8 +7,8 @@ import unittest
 from mojo.extension.extensionvariables import ExtensionConfiguration
 from mojo.extension.wellknown import ConfiguredSuperFactorySingleton
 
-from myextinst import MyExtInstProtocol, MyExtInstFactory
-from myexttype import MyExtTypeProtocol, MyExtTypeFactory
+from tests.myextinst import MyExtInstProtocol, MyExtInstFactory
+from tests.myexttype import MyExtTypeProtocol, MyExtTypeFactory
 
 
 class TestConfiguredExtensions(unittest.TestCase):
