@@ -47,8 +47,8 @@ jobs:
         run: |
           source ./.venv/bin/activate
           pushd ./source/tests
-          python3 -m unittest discover test_configfile_extensions.py
-          python3 -m unittest discover test_variable_extensions.py
+          python3 -m unittest test_configfile_extensions.py
+          python3 -m unittest test_variable_extensions.py
           popd
           deactivate
 
