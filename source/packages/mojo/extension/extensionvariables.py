@@ -18,10 +18,9 @@ __license__ = "MIT"
 import os
 
 from mojo.startup.startupconfigloader import StartupConfigLoader
+from mojo.startup.converters import CSV_TO_UNIQUE_LIST_CONVERTER
 
 scloader = StartupConfigLoader("MOJO-EXTENSION")
-
-csv_converter = lambda sval: list(set(sval.split(',')))
 
 class ExtensionConfiguration:
 
@@ -31,5 +30,5 @@ class ExtensionConfiguration:
     # the value is not found in either location, the specifieid default is used.
 
     MJR_CONFIGURED_FACTORY_MODULES = scloader.get_variable_value(
-        "MJR_CONFIGURED_FACTORY_MODULES", default=[], converter=csv_converter
+        "MJR_CONFIGURED_FACTORY_MODULES", default=[], converter=CSV_TO_UNIQUE_LIST_CONVERTER
     )
