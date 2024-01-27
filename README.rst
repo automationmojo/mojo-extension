@@ -93,7 +93,8 @@ Setting the MJR_CONFIGURED_FACTORY_MODULES Variable from Python
 Setting the MJR_CONFIGURED_FACTORY_MODULES Environment Variable
 ---------------------------------------------------------------
 
-.. code:: bash
+.. code::
+    
     MJR_CONFIGURED_FACTORY_MODULES=mypkg.a.factories,mypkg.b.factories
 
 ----------------------------------------------------------------
