@@ -357,14 +357,14 @@ files = [
 
 [[package]]
 name = "mojo-startup"
-version = "1.3.4"
+version = "1.3.5"
 description = "Automation Mojo Startup Package"
 category = "main"
 optional = false
 python-versions = ">=3.8,<4.0"
 files = [
-    {file = "mojo_startup-1.3.4-py3-none-any.whl", hash = "sha256:61c195b5d40aa65b4913f3644a0f029736ad03f1155cce2d1274030d8144ead7"},
-    {file = "mojo_startup-1.3.4.tar.gz", hash = "sha256:0ea9b204b37f2b63b93ec6425e8009bf341bbded915ebc7371a0d45ec151a67c"},
+    {file = "mojo_startup-1.3.5-py3-none-any.whl", hash = "sha256:51480576dcd0bd447045b7a8066978683ac9d19af063e3e312539b15ee0c5eb6"},
+    {file = "mojo_startup-1.3.5.tar.gz", hash = "sha256:01eedaff18ff351baa98dde4c50a40cbf5406638f63e194480c16d2d3d696908"},
 ]
 
 [[package]]
@@ -743,4 +743,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<4.0"
-content-hash = "52a15fb33575751ce1d91e138f947f4cce035ee2f766e8aa984062967a8ab7d9"
+content-hash = "0b13a7b48a66d44c28e10ee6ea54d32dda2c60deaae13e04a471dba10da94d17"

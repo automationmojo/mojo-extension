@@ -22,7 +22,7 @@ repository = "https://github.com/automationmojo/mojo-extension"
 
 [tool.poetry.dependencies]
 python = ">=3.8,<4.0"
-mojo-startup = ">=1.3.4 <1.4.0"
+mojo-startup = ">=1.3.5 <1.4.0"
 
 [tool.poetry.group.dev.dependencies]
 myst-parser = "^0.18.1"
