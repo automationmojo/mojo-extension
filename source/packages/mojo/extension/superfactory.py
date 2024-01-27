@@ -22,6 +22,8 @@ import threading
 from operator import attrgetter
 from typing import Callable, Generator, List, Type, Union
 
+from mojo.extension.extensionfactory import ExtFactory
+
 from mojo.extension.utilities import (
     load_and_set_extension_factory_type,
     scan_mojo_factories_namespace
@@ -42,7 +44,7 @@ class SuperFactory:
         if len(factory_modules) > 0:
             self._factory_modules.extend(factory_modules)
 
-        self._extension_factories = []
+        self._extension_factories: List[ExtFactory] = []
 
         for smod in self._factory_modules:
             factory_type = load_and_set_extension_factory_type(smod)

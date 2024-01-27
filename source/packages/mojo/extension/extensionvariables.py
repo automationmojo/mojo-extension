@@ -17,22 +17,19 @@ __license__ = "MIT"
 
 import os
 
-from mojo.startup.wellknown import StartupConfigSingleton
+from mojo.startup.startupconfigloader import StartupConfigLoader
 
-my_config = {}
+scloader = StartupConfigLoader("MOJO-EXTENSION")
 
-startup_config = StartupConfigSingleton()
-if "MOJO-EXTENSION" in startup_config:
-    my_config = startup_config["MOJO-EXTENSION"]
+csv_converter = lambda sval: list(set(sval.split(',')))
 
 class ExtensionConfiguration:
 
-    MJR_CONFIGURED_FACTORY_MODULES = []
-    if "MJR_CONFIGURED_FACTORY_MODULES" in os.environ:
-        modules_as_path = os.environ["MJR_CONFIGURED_FACTORY_MODULES"]
-        MJR_CONFIGURED_FACTORY_MODULES = set([m.strip() for m in modules_as_path.split(",")])
-    elif "MJR_CONFIGURED_FACTORY_MODULES" in my_config:
-        modules_as_path = my_config["MJR_CONFIGURED_FACTORY_MODULES"]
-        MJR_CONFIGURED_FACTORY_MODULES = set([m.strip() for m in modules_as_path.split(",")])
+    # For the `MJR_CONFIGURED_FACTORY_MODULES` variable, if we find it in the environment,
+    # then the value set in the environment.  If the value is not found in the environment,
+    # then the loader will look in the `MOJO-EXTENSIONS` section of the startup config. If
+    # the value is not found in either location, the specifieid default is used.
 
-    
+    MJR_CONFIGURED_FACTORY_MODULES = scloader.get_variable_value(
+        "MJR_CONFIGURED_FACTORY_MODULES", default=[], converter=csv_converter
+    )
