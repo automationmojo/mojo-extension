@@ -24,6 +24,15 @@ scloader = StartupConfigLoader("MOJO-EXTENSION")
 
 class ExtensionConfiguration:
 
+
+    MJR_NAME = scloader.get_variable_value("MJR_NAME", default="mjr")
+
+
+    MJR_HOME_DIRECTORY = scloader.get_variable_value("MJR_HOME_DIRECTORY",
+            default=os.path.expanduser(os.path.join("~", MJR_NAME)))
+    MJR_HOME_DIRECTORY = os.path.abspath(os.path.expandvars(os.path.expanduser(MJR_HOME_DIRECTORY)))
+
+
     # For the `MJR_CONFIGURED_FACTORY_MODULES` variable, if we find it in the environment,
     # then the value set in the environment.  If the value is not found in the environment,
     # then the loader will look in the `MOJO-EXTENSIONS` section of the startup config. If
@@ -32,3 +41,16 @@ class ExtensionConfiguration:
     MJR_CONFIGURED_FACTORY_MODULES = scloader.get_variable_value(
         "MJR_CONFIGURED_FACTORY_MODULES", default=[], converter=CSV_TO_UNIQUE_LIST_CONVERTER
     )
+
+
+def establish_rebranded_home(name: str, home_directory: str):
+    """
+        The `establish_rebranded_home` method is called to modify the name and home folder of the
+        environment.
+
+        :param name: A one word name for the environment.
+        :param home_directory: The home directory where configuration files and results will be stored.
+    """
+    ExtensionConfiguration.MJR_NAME = name
+    ExtensionConfiguration.MJR_HOME_DIRECTORY = home_directory
+    return
