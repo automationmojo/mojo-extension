@@ -43,6 +43,7 @@ class MOJO_EXTENSION_VARIABLES(MOJO_STARTUP_VARIABLES):
         "MJR_CONFIGURED_FACTORY_MODULES", default=[], converter=CSV_TO_UNIQUE_LIST_CONVERTER
     )
 
+BRANDING_ESTABLISHED = False
 
 def establish_rebranded_home(name: str, home_directory: str):
     """
@@ -52,6 +53,11 @@ def establish_rebranded_home(name: str, home_directory: str):
         :param name: A one word name for the environment.
         :param home_directory: The home directory where configuration files and results will be stored.
     """
-    MOJO_EXTENSION_VARIABLES.MJR_NAME = name
-    MOJO_EXTENSION_VARIABLES.MJR_HOME_DIRECTORY = home_directory
+    global BRANDING_ESTABLISHED
+
+    if not BRANDING_ESTABLISHED:
+        BRANDING_ESTABLISHED = True
+        MOJO_EXTENSION_VARIABLES.MJR_NAME = name
+        MOJO_EXTENSION_VARIABLES.MJR_HOME_DIRECTORY = home_directory
+
     return
