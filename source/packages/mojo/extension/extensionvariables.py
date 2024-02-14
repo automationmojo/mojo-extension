@@ -15,6 +15,8 @@ __email__ = "myron.walker@gmail.com"
 __status__ = "Development" # Prototype, Development or Production
 __license__ = "MIT"
 
+from typing import Optional
+
 import os
 
 from mojo.startup.startupconfigloader import StartupConfigLoader
@@ -45,7 +47,7 @@ class MOJO_EXTENSION_VARIABLES(MOJO_STARTUP_VARIABLES):
 
 BRANDING_ESTABLISHED = False
 
-def establish_rebranded_home(name: str, home_directory: str):
+def establish_rebranded_home(name: Optional[str]=None, home_directory: Optional[str]=None):
     """
         The `establish_rebranded_home` method is called to modify the name and home folder of the
         environment.
@@ -57,7 +59,9 @@ def establish_rebranded_home(name: str, home_directory: str):
 
     if not BRANDING_ESTABLISHED:
         BRANDING_ESTABLISHED = True
-        MOJO_EXTENSION_VARIABLES.MJR_NAME = name
-        MOJO_EXTENSION_VARIABLES.MJR_HOME_DIRECTORY = home_directory
+        if name is not None:
+            MOJO_EXTENSION_VARIABLES.MJR_NAME = name
+        if home_directory is not None:
+            MOJO_EXTENSION_VARIABLES.MJR_HOME_DIRECTORY = home_directory
 
     return
