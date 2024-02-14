@@ -19,10 +19,11 @@ import os
 
 from mojo.startup.startupconfigloader import StartupConfigLoader
 from mojo.startup.converters import CSV_TO_UNIQUE_LIST_CONVERTER
+from mojo.startup.startupvariables import MOJO_STARTUP_VARIABLES
 
 scloader = StartupConfigLoader("MOJO-EXTENSION")
 
-class ExtensionConfiguration:
+class MOJO_EXTENSION_VARIABLES(MOJO_STARTUP_VARIABLES):
 
 
     MJR_NAME = scloader.get_variable_value("MJR_NAME", default="mjr")
@@ -51,6 +52,6 @@ def establish_rebranded_home(name: str, home_directory: str):
         :param name: A one word name for the environment.
         :param home_directory: The home directory where configuration files and results will be stored.
     """
-    ExtensionConfiguration.MJR_NAME = name
-    ExtensionConfiguration.MJR_HOME_DIRECTORY = home_directory
+    MOJO_EXTENSION_VARIABLES.MJR_NAME = name
+    MOJO_EXTENSION_VARIABLES.MJR_HOME_DIRECTORY = home_directory
     return

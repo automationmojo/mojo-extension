@@ -4,7 +4,7 @@ from typing import Type
 import sys
 import unittest
 
-from mojo.extension.extensionvariables import ExtensionConfiguration
+from mojo.extension.extensionvariables import MOJO_EXTENSION_VARIABLES
 from mojo.extension.wellknown import ConfiguredSuperFactorySingleton
 
 from myextinst import MyExtInstProtocol, MyExtInstFactory
@@ -15,7 +15,7 @@ class TestConfiguredExtensions(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-        ExtensionConfiguration.MJR_CONFIGURED_FACTORY_MODULES = [
+        MOJO_EXTENSION_VARIABLES.MJR_CONFIGURED_FACTORY_MODULES = [
             "myextinst",
             "myexttype"
         ]
