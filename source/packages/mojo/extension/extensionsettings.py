@@ -40,7 +40,7 @@ class MOJO_EXTENSION_VARIABLE_DEFAULTS:
 
 EXTENSION_SETTINGS_ESTABLISHED = False
 
-def establish_extension_settings(name: Optional[str]=None, home_directory: Optional[str]=None):
+def establish_extension_settings(name: Optional[str]=None, home_dir: Optional[str]=None):
     """
         The `establish_extension_settings` method is called to modify the name and home folder of the
         environment.  This is accomplished by overloading a the 'Startup' defaults.  The name and home
@@ -55,7 +55,7 @@ def establish_extension_settings(name: Optional[str]=None, home_directory: Optio
         EXTENSION_SETTINGS_ESTABLISHED = True
         if name is not None:
             MOJO_EXTENSION_VARIABLE_DEFAULTS.MJR_NAME = name
-        if home_directory is not None:
-            MOJO_EXTENSION_VARIABLE_DEFAULTS.MJR_HOME_DIRECTORY = home_directory
+        if home_dir is not None:
+            MOJO_EXTENSION_VARIABLE_DEFAULTS.MJR_HOME_DIRECTORY = home_dir
 
     return
