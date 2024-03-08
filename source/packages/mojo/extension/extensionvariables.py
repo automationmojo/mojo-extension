@@ -57,6 +57,26 @@ class MOJO_EXTENSION_VARIABLES(MOJO_STARTUP_VARIABLES):
 
 BRANDING_ESTABLISHED = False
 
+def establish_startup_settings(name: Optional[str]=None, home_directory: Optional[str]=None):
+    """
+        The `establish_startup_settings` method is called to modify the name and home folder of the
+        environment.  This is accomplished by overloading a the 'Startup' defaults.  The name and home
+        directory might still be changed later during the 'Parameterize' phase.
+
+        :param name: A one word name for the environment.
+        :param home_directory: The home directory where configuration files and results will be stored.
+    """
+    global BRANDING_ESTABLISHED
+
+    if not BRANDING_ESTABLISHED:
+        BRANDING_ESTABLISHED = True
+        if name is not None:
+            MOJO_EXTENSION_VARIABLE_DEFAULTS.MJR_NAME = name
+        if home_directory is not None:
+            MOJO_EXTENSION_VARIABLE_DEFAULTS.MJR_HOME_DIRECTORY = home_directory
+
+    return
+
 def establish_rebranded_home(name: Optional[str]=None, home_directory: Optional[str]=None):
     """
         The `establish_rebranded_home` method is called to modify the name and home folder of the
