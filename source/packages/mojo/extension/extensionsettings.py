@@ -38,21 +38,21 @@ class MOJO_EXTENSION_VARIABLE_DEFAULTS:
         "MJR_CONFIGURED_FACTORY_MODULES", default=[], converter=CSV_TO_UNIQUE_LIST_CONVERTER
     )
 
-BRANDING_ESTABLISHED = False
+EXTENSION_SETTINGS_ESTABLISHED = False
 
-def establish_startup_settings(name: Optional[str]=None, home_directory: Optional[str]=None):
+def establish_extension_settings(name: Optional[str]=None, home_directory: Optional[str]=None):
     """
-        The `establish_startup_settings` method is called to modify the name and home folder of the
+        The `establish_extension_settings` method is called to modify the name and home folder of the
         environment.  This is accomplished by overloading a the 'Startup' defaults.  The name and home
         directory might still be changed later during the 'Parameterize' phase.
 
         :param name: A one word name for the environment.
         :param home_directory: The home directory where configuration files and results will be stored.
     """
-    global BRANDING_ESTABLISHED
+    global EXTENSION_SETTINGS_ESTABLISHED
 
-    if not BRANDING_ESTABLISHED:
-        BRANDING_ESTABLISHED = True
+    if not EXTENSION_SETTINGS_ESTABLISHED:
+        EXTENSION_SETTINGS_ESTABLISHED = True
         if name is not None:
             MOJO_EXTENSION_VARIABLE_DEFAULTS.MJR_NAME = name
         if home_directory is not None:
