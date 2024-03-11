@@ -28,7 +28,7 @@ def ConfiguredSuperFactorySingleton():
     if CONFIGURED_SUPER_FACTORY is None:
         factory_modules = []
 
-        factory_modules_value = MOJO_EXTENSION_VARIABLES.MJR_CONFIGURED_FACTORY_MODULES
+        factory_modules_value = MOJO_EXTENSION_VARIABLES.MJR_CONFIGURED_FACTORY_MODULES.strip()
         if len(factory_modules_value) > 0:
             factory_modules = factory_modules_value.split(",")
         
