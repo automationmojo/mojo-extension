@@ -15,10 +15,7 @@ class TestConfiguredExtensions(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-        MOJO_EXTENSION_VARIABLES.MJR_CONFIGURED_FACTORY_MODULES = [
-            "myextinst",
-            "myexttype"
-        ]
+        MOJO_EXTENSION_VARIABLES.MJR_CONFIGURED_FACTORY_MODULES = "myextinst,myexttype"
 
         cls._super_factory = ConfiguredSuperFactorySingleton()
         return
