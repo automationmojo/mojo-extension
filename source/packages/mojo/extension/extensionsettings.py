@@ -34,9 +34,7 @@ class MOJO_EXTENSION_VARIABLE_DEFAULTS:
             default=os.path.expanduser(os.path.join("~", MJR_NAME)))
     MJR_HOME_DIRECTORY = os.path.abspath(os.path.expandvars(os.path.expanduser(MJR_HOME_DIRECTORY)))
 
-    MJR_CONFIGURED_FACTORY_MODULES = scloader.get_variable_value(
-        "MJR_CONFIGURED_FACTORY_MODULES", default=[], converter=CSV_TO_UNIQUE_LIST_CONVERTER
-    )
+    MJR_CONFIGURED_FACTORY_MODULES = scloader.get_variable_value("MJR_CONFIGURED_FACTORY_MODULES", default="")
 
 EXTENSION_SETTINGS_ESTABLISHED = False
 
