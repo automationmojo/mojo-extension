@@ -11,8 +11,6 @@ __copyright__ = "Copyright 2023, Myron W Walker"
 __credits__ = []
 
 
-from typing import Dict
-
 from dataclasses import dataclass, asdict
 
 @dataclass

@@ -14,21 +14,30 @@ __credits__ = []
 
 CONFIGURED_SUPER_FACTORY = None
 
-from mojo.extension.extensionvariables import MOJO_EXTENSION_VARIABLES
+from mojo.collections.singletons import SINGLETON_LOCK
+
+from mojo.startup.presencevariables import MOJO_PRESENCE_VARIABLES
+
 from mojo.extension.superfactory import SuperFactory
 
 def ConfiguredSuperFactorySingleton():
 
     global CONFIGURED_SUPER_FACTORY
 
-    if CONFIGURED_SUPER_FACTORY is None:
-        factory_modules = []
+    SINGLETON_LOCK.acquire()
+    try:
+        if CONFIGURED_SUPER_FACTORY is None:
+            extension_modules = []
 
-        factory_modules_value = MOJO_EXTENSION_VARIABLES.MJR_CONFIGURED_FACTORY_MODULES.strip()
-        if len(factory_modules_value) > 0:
-            factory_modules = factory_modules_value.split(",")
-        
-        CONFIGURED_SUPER_FACTORY = SuperFactory(factory_modules)
+            extension_modules_value: str = MOJO_PRESENCE_VARIABLES.MJR_EXTENSION_MODULES
+            extension_modules_value.strip()
+
+            if len(extension_modules_value) > 0:
+                extension_modules = extension_modules_value.split(",")
+            
+            CONFIGURED_SUPER_FACTORY = SuperFactory(extension_modules)
+    finally:
+        SINGLETON_LOCK.release()
 
     return CONFIGURED_SUPER_FACTORY
 

@@ -12,9 +12,6 @@ __copyright__ = "Copyright 2023, Myron W Walker"
 __credits__ = []
 
 
-import inspect
-import threading
-
 from operator import attrgetter
 from typing import Callable, Generator, List, Type, Union
 
