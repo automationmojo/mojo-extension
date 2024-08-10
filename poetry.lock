@@ -14,14 +14,14 @@ files = [
 
 [[package]]
 name = "mojo-startup"
-version = "2.0.2"
+version = "2.0.3"
 description = "Automation Mojo Startup Package"
 category = "main"
 optional = false
 python-versions = "<4.0,>=3.9"
 files = [
-    {file = "mojo_startup-2.0.2-py3-none-any.whl", hash = "sha256:7ac8ac84203d7d2c23620c5c6de78f8245bccd88b4df039591ace47561aa1da6"},
-    {file = "mojo_startup-2.0.2.tar.gz", hash = "sha256:a1d9fb7fe9bc0c869a4422817300ada07507b32a786d01e81781714a941af901"},
+    {file = "mojo_startup-2.0.3-py3-none-any.whl", hash = "sha256:e7181dd3f0aecb2542bd324608fc1f97099885f6dcac7103437adfb8e5bf436d"},
+    {file = "mojo_startup-2.0.3.tar.gz", hash = "sha256:34358bfdbc02b691eea64e55e185132fcb7b505c3891cc92b25e78441388c129"},
 ]
 
 [package.dependencies]
@@ -43,4 +43,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<4.0"
-content-hash = "4747010b581c8f9fa7e50223534421538ef9e3e604650eb79cdcb5491e379105"
+content-hash = "796aba005fd99db729b1ffc87effaaf82cfb9b565dbf60c8b5f7539b82584ee5"

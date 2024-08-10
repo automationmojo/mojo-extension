@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "mojo-extension"
 description = "Automation Mojo Extension Package"
-version = "2.0.2"
+version = "2.0.3"
 authors = [
     "Myron Walker <myron.walker@gmail.com>"
 ]
@@ -22,7 +22,7 @@ repository = "https://github.com/automationmojo/mojo-extension"
 
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0"
-mojo-startup = ">=2.0.2 <2.1.0"
+mojo-startup = ">=2.0.3 <2.1.0"
 mojo-collections = ">=2.0.1 <2.1.0"
 
 [tool.poetry.group.dbio.dependencies]
