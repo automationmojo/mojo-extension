@@ -14,6 +14,8 @@ __credits__ = []
 
 CONFIGURED_SUPER_FACTORY = None
 
+from mojo.errors.exceptions import SemanticError
+
 from mojo.collections.singletons import SINGLETON_LOCK
 
 from mojo.startup.presencevariables import MOJO_PRESENCE_VARIABLES
@@ -28,6 +30,10 @@ def ConfiguredSuperFactorySingleton():
     try:
         if CONFIGURED_SUPER_FACTORY is None:
             extension_modules = []
+
+            if MOJO_PRESENCE_VARIABLES.MJR_EXTENSION_MODULES is None:
+                errmsg = "You must first call 'resolve_presence_variables' before attempting to create a SuperFactory singleton."
+                raise SemanticError(errmsg)
 
             extension_modules_value: str = MOJO_PRESENCE_VARIABLES.MJR_EXTENSION_MODULES
             extension_modules_value.strip()
