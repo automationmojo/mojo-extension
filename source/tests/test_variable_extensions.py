@@ -1,10 +1,11 @@
 
-from typing import Type
 
-import sys
+import os
 import unittest
 
-from mojo.extension.extensionvariables import MOJO_EXTENSION_VARIABLES
+from mojo.startup.presencesettings import establish_presence_settings
+from mojo.startup.presencevariables import resolve_presence_variables
+
 from mojo.extension.wellknown import ConfiguredSuperFactorySingleton
 
 from myextinst import MyExtInstProtocol, MyExtInstFactory
@@ -15,9 +16,13 @@ class TestConfiguredExtensions(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-        MOJO_EXTENSION_VARIABLES.MJR_CONFIGURED_FACTORY_MODULES = "myextinst,myexttype"
 
+        establish_presence_settings(extension_modules="myextinst,myexttype")
+        
+        resolve_presence_variables()
+        
         cls._super_factory = ConfiguredSuperFactorySingleton()
+
         return
     
     def test_create_instance_by_order(self):

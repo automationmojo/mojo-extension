@@ -23,7 +23,7 @@ repository = "https://github.com/automationmojo/mojo-extension"
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0"
 mojo-errors = ">=2.0.0 <2.1.0"
-mojo-startup = ">=2.0.3 <2.1.0"
+mojo-startup = ">=2.0.4 <2.1.0"
 mojo-collections = ">=2.0.1 <2.1.0"
 
 [tool.poetry.group.dbio.dependencies]

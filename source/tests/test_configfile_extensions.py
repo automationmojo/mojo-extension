@@ -2,15 +2,16 @@
 import tempfile
 import unittest
 
-from mojo.startup.startupvariables import MOJO_STARTUP_VARIABLES
+from mojo.startup.presencesettings import establish_presence_settings
+from mojo.startup.presencevariables import resolve_presence_variables
 from mojo.startup.wellknown import StartupConfigSingleton
 
 from myextinst import MyExtInstProtocol, MyExtInstFactory
 from myexttype import MyExtTypeProtocol, MyExtTypeFactory
 
 CONFIG_CONTENT = """
-[MOJO-EXTENSION]
-MJR_CONFIGURED_FACTORY_MODULES = myextinst,myexttype
+[MOJO-STARTUP]
+MJR_EXTENSION_MODULES = myextinst,myexttype
 """
 
 class TestConfiguredExtensions(unittest.TestCase):
@@ -22,10 +23,12 @@ class TestConfiguredExtensions(unittest.TestCase):
         with open(tempconfig, 'w+') as cf:
             cf.write(CONFIG_CONTENT)
 
-        MOJO_STARTUP_VARIABLES.MJR_STARTUP_SETTINGS = tempconfig
+        establish_presence_settings(settings_file=tempconfig)
+        
+        resolve_presence_variables()
 
         cls._startup_config = StartupConfigSingleton()
-        cls._ext_config = cls._startup_config["MOJO-EXTENSION"]
+        cls._ext_config = cls._startup_config["MOJO-STARTUP"]
 
         from mojo.extension.wellknown import ConfiguredSuperFactorySingleton
         cls._super_factory = ConfiguredSuperFactorySingleton()
